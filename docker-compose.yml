@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  database:
+    image: mysql:8.0
+    ports:
+      - '${MYSQL_PORT}:${MYSQL_PORT}'
+    environment:
+      MYSQL_DATABASE: '${MYSQL_DB}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+    volumes:
+      - db-volume:/var/lib/mysql
+
+volumes:
+  db-volume:
