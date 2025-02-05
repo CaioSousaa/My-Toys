@@ -4,6 +4,7 @@ import { GetAllCustomers } from './services/get-all-customers.service';
 import { CustomerResolver } from './customer.resolver';
 import { PrismaCustomerRepository } from 'src/external/repositories/prisma-customer-repository';
 import { CustomerRegisterCreditCardService } from './services/customer-register-credit-card.service';
+import { FindCustomerByIdService } from './services/find-customer-by-id.service';
 import { BcryptHash } from './providers/hash/implementations/bcrypt-hash';
 import { PrismaCreditCardRepository } from '../../external/repositories/prisma-credit-card-repository';
 
@@ -18,6 +19,7 @@ import { PrismaCreditCardRepository } from '../../external/repositories/prisma-c
     GetAllCustomers,
     CustomerRegisterCreditCardService,
     PrismaCreditCardRepository,
+    FindCustomerByIdService,
   ],
 })
 export class CustomerModule {}

@@ -6,6 +6,7 @@ import { CustomerRegisterCreditCardService } from './services/customer-register-
 import { CustomerInput } from './dto/input/customer-input';
 import { CreditCardModel } from './dto/models/credit-card-model';
 import { RegisterCreditCardInput } from './dto/input/register-credit-card-input';
+import { FindCustomerByIdService } from './services/find-customer-by-id.service';
 
 @Resolver(() => CustomerModel)
 export class CustomerResolver {
@@ -13,6 +14,7 @@ export class CustomerResolver {
     private readonly createCustomerService: CreateCustomerService,
     private readonly getAllCustomerService: GetAllCustomers,
     private readonly customerRegisterCreditCardService: CustomerRegisterCreditCardService,
+    private readonly findCustomerByIdService: FindCustomerByIdService,
   ) {}
 
   @Query(() => [CustomerModel])
@@ -20,6 +22,16 @@ export class CustomerResolver {
     const customers = await this.getAllCustomerService.execute();
 
     return customers;
+  }
+
+  @Query(() => CustomerModel)
+  async findCustomerById(@Args('id') id: string): Promise<CustomerModel> {
+    const customer = await this.findCustomerByIdService.execute(id);
+
+    return {
+      ...customer,
+      id: customer.id ?? '',
+    };
   }
 
   @Mutation(() => CustomerModel)
