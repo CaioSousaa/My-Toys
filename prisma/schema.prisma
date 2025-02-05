@@ -22,7 +22,7 @@ model CreditCard {
   id              String @id @unique @default(uuid()) 
   cvv             Int
   cardNumber      Int
-  expirationDate  DateTime
+  expirationDate  String
   addsAt          DateTime
   customer        Customer @relation(fields: [customerId], references: [id])
   customerId      String 

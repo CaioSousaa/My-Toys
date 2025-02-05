@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreditCard {
   id?: string;
@@ -12,7 +18,9 @@ export class CreditCard {
   cardNumber: number;
 
   @IsNotEmpty()
-  expirationDate: Date;
+  @MinLength(6)
+  @MaxLength(6)
+  expirationDate: string;
 
   @IsString()
   @IsNotEmpty()
