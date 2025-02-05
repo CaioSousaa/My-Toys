@@ -1,15 +1,21 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CustomerModel } from './dto/models/customer-model';
 import { CreateCustomerService } from './services/create-customer.service';
+import { GetAllCustomers } from './services/get-all-customers.service';
 import { CustomerInput } from './dto/input/customer-input';
 
 @Resolver(() => CustomerModel)
 export class CustomerResolver {
-  constructor(private readonly createCustomerService: CreateCustomerService) {}
+  constructor(
+    private readonly createCustomerService: CreateCustomerService,
+    private readonly getAllCustomerService: GetAllCustomers,
+  ) {}
 
-  @Query(() => String)
-  hello() {
-    return 'Hello, world!';
+  @Query(() => [CustomerModel])
+  async getAllCustomer() {
+    const customers = await this.getAllCustomerService.execute();
+
+    return customers;
   }
 
   @Mutation(() => CustomerModel)
