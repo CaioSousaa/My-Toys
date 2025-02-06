@@ -3,6 +3,7 @@ import { ProductModel } from './dto/models/product-model';
 import { RegisteringProductInStock } from './services/registering-product-in-stock.service';
 import { CreateProductInput } from './dto/input/create-product-input';
 import { UpdateProductService } from '../product/services/update-product.service';
+import { DeleteProductService } from '../product/services/delete-product.service';
 import { UpdateProductInput } from './dto/input/update-product-input';
 
 @Resolver(() => ProductModel)
@@ -10,6 +11,7 @@ export class ProductResolver {
   constructor(
     private registeringProductInStock: RegisteringProductInStock,
     private updateProductService: UpdateProductService,
+    private deleteProductService: DeleteProductService,
   ) {}
 
   @Query(() => String)
@@ -42,5 +44,13 @@ export class ProductResolver {
       ...newDataUpdateProduct,
       id: newDataUpdateProduct.id ?? '',
     };
+  }
+
+  @Mutation(() => Boolean)
+  async deleteProductAndProductInStock(
+    @Args('id') id: string,
+  ): Promise<boolean> {
+    await this.deleteProductService.execute(id);
+    return true;
   }
 }

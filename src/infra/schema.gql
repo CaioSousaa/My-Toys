@@ -45,6 +45,7 @@ type Mutation {
   addCreditCard(registerCardCredit: RegisterCreditCardInput!): CreditCardModel!
   createProduct(dataProductInput: CreateProductInput!): ProductModel!
   updateProduct(updateProductDataInput: UpdateProductInput!): ProductModel!
+  deleteProductAndProductInStock(id: String!): Boolean!
 }
 
 input CustomerInput {

@@ -4,6 +4,14 @@ import prisma from 'src/infra/prisma/prisma';
 import { StockRepository } from 'src/modules/product/port/stock-repository';
 
 export class PrismaStockRepository implements StockRepository {
+  async deleteProdcutInStock(productId: string): Promise<void> {
+    await prisma.stock.delete({
+      where: {
+        productId,
+      },
+    });
+  }
+
   async create({ amountProduct, productId }: Stock): Promise<Stock> {
     if (productId === undefined) {
       throw new NotAcceptableException('productId is undefined');

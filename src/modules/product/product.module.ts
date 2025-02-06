@@ -4,6 +4,7 @@ import { PrismaStockRepository } from 'src/external/repositories/prisma-stock-re
 import { PrismaProductRepository } from 'src/external/repositories/prisma-product-repository';
 import { RegisteringProductInStock } from './services/registering-product-in-stock.service';
 import { UpdateProductService } from './services/update-product.service';
+import { DeleteProductService } from './services/delete-product.service';
 
 @Module({
   providers: [
@@ -12,6 +13,7 @@ import { UpdateProductService } from './services/update-product.service';
     PrismaProductRepository,
     RegisteringProductInStock,
     UpdateProductService,
+    DeleteProductService,
   ],
 })
 export class ProductModule {}

@@ -3,6 +3,14 @@ import prisma from 'src/infra/prisma/prisma';
 import { ProductRepository } from 'src/modules/product/port/product-repository';
 
 export class PrismaProductRepository implements ProductRepository {
+  async deleteProduct(id: string): Promise<void> {
+    await prisma.product.delete({
+      where: {
+        id,
+      },
+    });
+  }
+
   async findById(id: string): Promise<Product | null> {
     const product = await prisma.product.findUnique({ where: { id } });
 
