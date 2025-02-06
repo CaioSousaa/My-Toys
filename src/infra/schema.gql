@@ -44,6 +44,7 @@ type Mutation {
   createCustomer(newCustomerData: CustomerInput!): CustomerModel!
   addCreditCard(registerCardCredit: RegisterCreditCardInput!): CreditCardModel!
   createProduct(dataProductInput: CreateProductInput!): ProductModel!
+  updateProduct(updateProductDataInput: UpdateProductInput!): ProductModel!
 }
 
 input CustomerInput {
@@ -67,4 +68,10 @@ input CreateProductInput {
   category: String!
   description: String!
   mark: String!
+}
+
+input UpdateProductInput {
+  id: String!
+  priceInCents: Float
+  category: String
 }

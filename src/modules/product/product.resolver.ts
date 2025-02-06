@@ -2,10 +2,15 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ProductModel } from './dto/models/product-model';
 import { RegisteringProductInStock } from './services/registering-product-in-stock.service';
 import { CreateProductInput } from './dto/input/create-product-input';
+import { UpdateProductService } from '../product/services/update-product.service';
+import { UpdateProductInput } from './dto/input/update-product-input';
 
 @Resolver(() => ProductModel)
 export class ProductResolver {
-  constructor(private registeringProductInStock: RegisteringProductInStock) {}
+  constructor(
+    private registeringProductInStock: RegisteringProductInStock,
+    private updateProductService: UpdateProductService,
+  ) {}
 
   @Query(() => String)
   hello() {
@@ -22,6 +27,20 @@ export class ProductResolver {
     return {
       ...newProduct,
       id: newProduct.id ?? '',
+    };
+  }
+
+  @Mutation(() => ProductModel)
+  async updateProduct(
+    @Args('updateProductDataInput') updateProductDataInput: UpdateProductInput,
+  ): Promise<ProductModel> {
+    const newDataUpdateProduct = await this.updateProductService.execute(
+      updateProductDataInput,
+    );
+
+    return {
+      ...newDataUpdateProduct,
+      id: newDataUpdateProduct.id ?? '',
     };
   }
 }
