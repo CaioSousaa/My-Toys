@@ -57,7 +57,7 @@ model Product {
   scaleHW         String
   category        ProductCategory
   description     String
-  mark            String?
+  mark            String
   stock           Stock?
 
   @@map("product")

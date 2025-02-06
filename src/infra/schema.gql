@@ -24,14 +24,28 @@ type CreditCardModel {
   customerId: String!
 }
 
+type ProductModel {
+  id: ID
+  name: String!
+  priceInCents: Float!
+  scaleHW: String!
+  category: String!
+  description: String!
+  mark: String!
+}
+
 type Query {
   getAllCustomer: [CustomerModel!]!
   findCustomerById(id: String!): CustomerModel!
+  hello: String!
 }
 
 type Mutation {
   createCustomer(newCustomerData: CustomerInput!): CustomerModel!
   addCreditCard(registerCardCredit: RegisterCreditCardInput!): CreditCardModel!
+  createProduct(dataProductInput: CreateProductInput!): ProductModel!
+  updateProduct(updateProductDataInput: UpdateProductInput!): ProductModel!
+  deleteProductAndProductInStock(id: String!): Boolean!
 }
 
 input CustomerInput {
@@ -45,4 +59,20 @@ input RegisterCreditCardInput {
   cvv: Float!
   cardNumber: Float!
   expirationDate: String!
+}
+
+input CreateProductInput {
+  amountProduct: Float!
+  name: String!
+  priceInCents: Float!
+  scaleHW: String!
+  category: String!
+  description: String!
+  mark: String!
+}
+
+input UpdateProductInput {
+  id: String!
+  priceInCents: Float
+  category: String
 }
