@@ -34,6 +34,13 @@ type ProductModel {
   mark: String!
 }
 
+type PurchaseModel {
+  id: ID
+  customerId: String!
+  productId: String!
+  buyAt: DateTime!
+}
+
 type Query {
   getAllCustomer: [CustomerModel!]!
   findCustomerById(id: String!): CustomerModel!
@@ -46,6 +53,7 @@ type Mutation {
   createProduct(dataProductInput: CreateProductInput!): ProductModel!
   updateProduct(updateProductDataInput: UpdateProductInput!): ProductModel!
   deleteProductAndProductInStock(id: String!): Boolean!
+  customerPurchaseAProduct(purchaseData: PurchaseInput!): PurchaseModel!
 }
 
 input CustomerInput {
@@ -75,4 +83,10 @@ input UpdateProductInput {
   id: String!
   priceInCents: Float
   category: String
+}
+
+input PurchaseInput {
+  customerId: String!
+  productId: String!
+  amountProductsPurchase: Float!
 }
