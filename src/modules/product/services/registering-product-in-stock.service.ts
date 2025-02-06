@@ -34,7 +34,7 @@ export class RegisteringProductInStock {
     const createProduct: Product = Product.create({
       category,
       description,
-      name,
+      name: uppercaseName,
       priceInCents,
       scaleHW,
       mark,
