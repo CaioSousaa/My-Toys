@@ -9,7 +9,7 @@ export class Stock {
 
   @IsString()
   @IsNotEmpty()
-  productId: string;
+  productId: string | undefined;
 
   product?: Product;
 

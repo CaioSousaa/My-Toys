@@ -33,7 +33,7 @@ export class Product {
   description: string;
 
   @IsOptional()
-  mark?: string;
+  mark: string;
 
   constructor({
     category,
